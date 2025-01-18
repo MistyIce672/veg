@@ -1,49 +1,49 @@
 version: "3.8"
 
 services:
-  # PHP Apache service
-  web:
-    build: .
-    ports:
-      - "8080:8000"
-    volumes:
-      - ./:/var/www/html
-    depends_on:
-      - db
-    networks:
-      - app-network
+    # PHP Apache service
+    web:
+        build: .
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/var/www/html
+        depends_on:
+            - db
+        networks:
+            - app-network
 
-  # MySQL service
-  db:
-    image: mysql:8.0
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: veg
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 1qaz2wsx
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - app-network
+    # MySQL service
+    db:
+        image: mysql:8.0
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: veg
+            MYSQL_USER: user
+            MYSQL_PASSWORD: 1qaz2wsx
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - app-network
 
-  # phpMyAdmin service
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8000:8000"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root
-    depends_on:
-      - db
-    networks:
-      - app-network
+    # phpMyAdmin service
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8081:80"
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: root
+        depends_on:
+            - db
+        networks:
+            - app-network
 
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge
 
 volumes:
-  mysql_data:
+    mysql_data:
