@@ -89,7 +89,7 @@ while ($item = $items_result->fetch_assoc()) {
                                         ]; ?></p>
                                     </div>
                                 </div>
-                                <p class="font-medium">$<?php echo number_format(
+                                <p class="font-medium">LKR<?php echo number_format(
                                     $item["price"],
                                     2
                                 ); ?></p>
@@ -104,7 +104,7 @@ while ($item = $items_result->fetch_assoc()) {
                     <div class="border-t pt-4">
                         <div class="flex justify-between">
                             <p class="font-medium">Total</p>
-                            <p class="font-medium">$<?php echo number_format(
+                            <p class="font-medium">LKR<?php echo number_format(
                                 $order["total_amount"],
                                 2
                             ); ?></p>

@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Registration successful
             $_SESSION["success_message"] =
                 "Registration successful! You can now login.";
-            header("Location: signin.php");
+            header("Location: ../signin.php");
             exit();
         } else {
             // Registration failed
@@ -91,12 +91,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "lastName" => $lastName,
             "email" => $email,
         ];
-        header("Location: register.php");
+        header("Location: ../register.php");
         exit();
     }
 } else {
     // If someone tries to access this file directly without POST request
-    header("Location: register.php");
+    header("Location: ../register.php");
     exit();
 }
 

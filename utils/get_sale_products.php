@@ -2,82 +2,72 @@
 include "connection.php";
 
 // Fetch categories
-$category_sql = "SELECT * FROM categories where on_sale = '1'";
-$category_result = $conn->query($category_sql);
+$products_sql = "SELECT * FROM products where on_sale = '1'";
+$products = $conn->query($products_sql);
 
-if ($category_result->num_rows > 0) {
-    $category = $category_result->fetch_assoc();
-    $products_sql =
-        "SELECT * FROM products where category_id = " . $category["id"];
-    $products = $conn->query($products_sql);
-    if ($products->num_rows > 0) {
-        while ($product = $products->fetch_assoc()) {
-            echo "<div class='group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden'>";
+if ($products->num_rows > 0) {
+    while ($product = $products->fetch_assoc()) {
+        echo "<div class='group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden'>";
 
-            // Wrapper link for the entire card except the button
-            echo "<a href='product.php?id=" .
-                $product["id"] .
-                "' class='block'>";
+        // Wrapper link for the entire card except the button
+        echo "<a href='product.php?id=" . $product["id"] . "' class='block'>";
 
-            echo "<div class='aspect-w-1 aspect-h-1 w-full overflow-hidden'>";
-            echo "<img
+        echo "<div class='aspect-w-1 aspect-h-1 w-full overflow-hidden'>";
+        echo "<img
                     src='images/tomato.png'
                     alt='" .
-                $product["name"] .
-                "'
+            $product["name"] .
+            "'
                     class='w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-200'
                   />";
+        echo "</div>";
+
+        echo "<div class='p-4'>";
+        echo "<h3 class='text-lg font-medium text-gray-900 group-hover:text-green-600 transition-colors duration-200'>" .
+            $product["name"] .
+            "</h3>";
+
+        // Price display logic
+        if (
+            isset($product["on_sale"]) &&
+            $product["on_sale"] &&
+            isset($product["sale_price"])
+        ) {
+            // Show both original and sale price when on sale
+            echo "<div class='mt-2'>";
+            echo "<span class='text-lg font-semibold text-red-600'>LKR " .
+                number_format($product["sale_price"], 2) .
+                "</span>";
+            echo "<span class='ml-2 text-sm text-gray-500 line-through'>LKR " .
+                number_format($product["price"], 2) .
+                "</span>";
             echo "</div>";
+        } else {
+            // Show regular price when not on sale
+            echo "<p class='mt-2 text-lg font-semibold text-green-600'>LKR " .
+                number_format($product["price"], 2) .
+                "</p>";
+        }
 
-            echo "<div class='p-4'>";
-            echo "<h3 class='text-lg font-medium text-gray-900 group-hover:text-green-600 transition-colors duration-200'>" .
-                $product["name"] .
-                "</h3>";
+        echo "</div>";
+        echo "</a>";
 
-            // Price display logic
-            if (
-                isset($product["on_sale"]) &&
-                $product["on_sale"] &&
-                isset($product["sale_price"])
-            ) {
-                // Show both original and sale price when on sale
-                echo "<div class='mt-2'>";
-                echo "<span class='text-lg font-semibold text-red-600'>LKR " .
-                    number_format($product["sale_price"], 2) .
-                    "</span>";
-                echo "<span class='ml-2 text-sm text-gray-500 line-through'>LKR " .
-                    number_format($product["price"], 2) .
-                    "</span>";
-                echo "</div>";
-            } else {
-                // Show regular price when not on sale
-                echo "<p class='mt-2 text-lg font-semibold text-green-600'>LKR " .
-                    number_format($product["price"], 2) .
-                    "</p>";
-            }
-
-            echo "</div>";
-            echo "</a>";
-
-            // Button outside of the link to prevent nested links
-            echo "<div class='px-4 pb-4'>";
-            echo "<button
+        // Button outside of the link to prevent nested links
+        echo "<div class='px-4 pb-4'>";
+        echo "<button
                     onclick='addToCart(" .
-                $product["id"] .
-                ")'
+            $product["id"] .
+            ")'
                     class='bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600'
                   >
                     Add to Cart
                   </button>";
-            echo "</div>";
+        echo "</div>";
 
-            echo "</div>";
-        }
-    } else {
-        echo "<div class='col-span-full text-center py-8 text-gray-500'>No products available in this category</div>";
+        echo "</div>";
     }
 } else {
-    echo "<div class='col-span-full text-center py-8 text-gray-500'>Not a valid category</div>";
+    echo "<div class='col-span-full text-center py-8 text-gray-500'>No products available in this category</div>";
 }
 
 $conn->close();

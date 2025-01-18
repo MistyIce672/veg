@@ -206,8 +206,33 @@ $orders = $conn->query($orders_sql);
                                         ); ?>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Completed
+                                        <?php
+                                        // Define status colors
+                                        $statusColors = [
+                                            "pending" =>
+                                                "bg-yellow-100 text-yellow-800",
+                                            "processing" =>
+                                                "bg-blue-100 text-blue-800",
+                                            "completed" =>
+                                                "bg-green-100 text-green-800",
+                                            "cancelled" =>
+                                                "bg-red-100 text-red-800",
+                                        ];
+
+                                        // Get status from order array
+                                        $status = strtolower($order["status"]);
+
+                                        // Get color classes based on status
+                                        $colorClass = isset(
+                                            $statusColors[$status]
+                                        )
+                                            ? $statusColors[$status]
+                                            : "bg-gray-100 text-gray-800";
+                                        ?>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?php echo $colorClass; ?>">
+                                            <?php echo ucfirst(
+                                                $order["status"]
+                                            ); ?>
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">

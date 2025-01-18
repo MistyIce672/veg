@@ -1,6 +1,5 @@
 <?php
 session_start();
-mkdir("new_folder");
 if (!isset($_SESSION["is_admin"]) || $_SESSION["is_admin"] !== true) {
     header("Location: login.php");
     exit();
@@ -29,19 +28,6 @@ $categories = $conn->query($categories_sql);
 
 // Handle form submission
 $upload_dir = "../uploads/";
-
-if (!file_exists($upload_dir)) {
-    try {
-        if (!mkdir($upload_dir, 0777, true)) {
-            throw new Exception("Failed to create upload directory");
-        }
-        chmod($upload_dir, 0777); // Ensure directory is writable
-    } catch (Exception $e) {
-        error_log("Failed to create directory: " . $e->getMessage());
-        $_SESSION["error"] =
-            "Upload directory creation failed. Please contact administrator.";
-    }
-}
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -76,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (
                 move_uploaded_file($_FILES["image"]["tmp_name"], $upload_path)
             ) {
-                $image_path = "uploads/products/" . $new_filename;
+                $image_path = "uploads/" . $new_filename;
             } else {
                 $_SESSION["error"] = "Failed to upload image.";
             }

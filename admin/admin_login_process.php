@@ -25,7 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare(
             "SELECT id, username, password FROM admin_users WHERE username = ?"
         );
-        $stmt->execute([$username]);
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
         $stmt->bind_result($user_id, $user_username, $user_password);
         $stmt = $stmt->fetch();
 

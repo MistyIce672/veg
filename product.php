@@ -30,9 +30,25 @@ $product = $result->fetch_assoc();
             <!-- Image gallery -->
             <div class="flex flex-col">
                 <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
-                    <img src="<?php echo $product["image"]; ?>"
-                         alt="<?php echo $product["name"]; ?>"
-                         class="w-full h-full object-center object-cover">
+                    <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
+                        <?php
+                        $imagePath = !empty($product["image"])
+                            ? $product["image"]
+                            : "images/default-product.jpg";
+                        $imageFullPath = __DIR__ . "/" . $imagePath;
+
+                        if (file_exists($imageFullPath)) {
+                            $imageUrl = $imagePath;
+                        } else {
+                            $imageUrl = "images/default-product.jpg";
+                        }
+                        ?>
+                        <img src="<?php echo htmlspecialchars($imageUrl); ?>"
+                             alt="<?php echo htmlspecialchars(
+                                 $product["name"]
+                             ); ?>"
+                             class="w-full h-full object-center object-cover">
+                    </div>
                 </div>
             </div>
 
