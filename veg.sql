@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2025 at 08:01 PM
+-- Generation Time: Jan 19, 2025 at 03:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `email`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
-(1, 'gauth672@gmail.com', '$2y$10$1LackmwR9UoUieOCUvadlOccHiLS6A6C.xrBaFsQU1ZwkO1u6bUSG', 'Gautham', 'Kulasingham', '2025-01-08 09:35:13', '2025-01-08 09:35:13');
+(2, 'travinahis14@gmail.com', '$2y$10$FP/WhFhWLZfn9PP3iFlzaOEPEcVlqHRdNSE0XTpFD8Yh9sKoPPGlC', 'Travin', 'Ahishayan', '2025-01-15 08:46:40', '2025-01-15 08:46:40');
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,6 @@ CREATE TABLE `admin_users` (
 --
 
 INSERT INTO `admin_users` (`id`, `username`, `password`, `created_at`) VALUES
-(1, 'gautham', 'admin', '2025-01-07 13:30:08'),
 (2, 'admin', '$2y$10$RycFIIRlPB8LkwvVOv3o1u1ZRVFqc6sA71sJwJej9egI5l.KjThr2', '2025-01-07 13:35:18');
 
 -- --------------------------------------------------------
@@ -79,13 +78,6 @@ CREATE TABLE `cart` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(5, 1, 5, 1, '2025-01-08 18:05:30', '2025-01-08 18:05:30');
 
 -- --------------------------------------------------------
 
@@ -148,8 +140,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `account_id`, `full_name`, `address`, `city`, `postal_code`, `phone`, `total_amount`, `status`, `created_at`) VALUES
-(1, 1, 'asdasd', 'asdasdasd', 'asdads', '123132', '234234234', 1200.00, 'processing', '2025-01-08 14:36:49'),
-(2, 1, 'asdasd', 'asdasdasd', 'asdads', '123132', '234234234', 300.00, 'pending', '2025-01-08 14:41:56');
+(3, 2, 'Travin Ahishayan', '202/38.1/1', 'Wattala', '11300', '0769069268', 250.00, 'pending', '2025-01-15 08:52:49'),
+(4, 2, 'Travin Ahishayan', '202/38.1/1', 'Wattala', '11300', '0769069268', 50450.00, 'cancelled', '2025-01-19 13:40:11'),
+(5, 2, 'Travin Ahishayan', '202/38.1/1', 'Wattala', '11300', '0769069268', 200.00, 'pending', '2025-01-19 13:42:48');
 
 -- --------------------------------------------------------
 
@@ -170,8 +163,7 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
-(1, 1, 6, 4, 300.00),
-(2, 2, 5, 1, 300.00);
+(6, 4, 7, 200, 200.00);
 
 -- --------------------------------------------------------
 
@@ -196,8 +188,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `in_stock`, `image`, `on_sale`, `category_id`, `sale_price`) VALUES
-(5, 'tomato', 'red vegetable', 300.00, 1, '', 1, 5, 250),
-(6, 'Banana', NULL, 300.00, 1, NULL, 0, 6, 0);
+(5, 'Tomato', 'Fresh, Juicy, and Full of Flavor Tomatoes\r\nBrighten your meals with the vibrant taste of farm-fresh tomatoes. Perfectly ripe and bursting with natural sweetness, these versatile gems are ideal for salads, sauces, sandwiches, or cooking up your favorite recipes. Handpicked for quality, they bring a touch of garden freshness to your kitchen.', 300.00, 1, 0x75706c6f6164732f363738636637353930383731372e706e67, 1, 5, 250),
+(6, 'Banana', 'Sweet, Creamy, and Naturally Energizing Bananas\r\nSavor the classic goodness of perfectly ripened bananas. Packed with natural sweetness and essential nutrients,\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 300.00, 1, 0x75706c6f6164732f363738636637323836636436342e6a706567, 0, 6, 0),
+(7, 'Mango', 'Juicy, Sweet, and Irresistible Mangoes\r\nIndulge in the rich, tropical flavor of premium mangoes. Perfectly ripened for a burst of sweetness in every bite, these mangoes are a versatile treat—enjoy them fresh, blend into smoothies, or add a splash of sunshine to your recipes. Handpicked for quality, they’re nature’s delicious gift, delivered straight to your doorstep.\r\n\r\n', 250.00, 1, 0x75706c6f6164732f363738636663376233353264302e6a706567, 1, 6, 200),
+(8, 'Beans', 'Crisp, Nutritious, and Versatile Beans\r\nEnjoy the garden-fresh goodness of premium beans. Packed with flavor and essential nutrients, these beans are perfect for stir-fries, salads, or steaming as a healthy side dish. Handpicked for quality and freshness, they’re a wholesome addition to every meal. Elevate your cooking with nature’s green delight!', 200.00, 1, 0x75706c6f6164732f363738636638363865333436332e6a706567, 0, 5, 0),
+(9, 'Drumstick ', 'Fresh, Nutritious, and Flavorful Drumsticks\r\nAdd a healthy twist to your meals with premium drumsticks. Known for their distinct flavor and rich nutritional value, they’re perfect for curries, soups, or stews. Handpicked for freshness and quality, these drumsticks are a wholesome ingredient to elevate your culinary creations.', 250.00, 1, 0x75706c6f6164732f363738636661633334623534612e706e67, 0, 5, 0),
+(10, 'Carrot', 'Crunchy, Sweet, and Packed with Goodness Carrots\r\nBrighten your meals with the natural sweetness and vibrant color of fresh carrots. Perfect for snacking, salads, soups, or roasting, these versatile veggies are a rich source of nutrients and flavor. Handpicked for quality and freshness, they’re a must-have for every healthy kitchen.', 150.00, 1, 0x75706c6f6164732f363738636663353630323665362e6a706567, 0, 5, 0),
+(11, 'Potato', 'Versatile, Nutritious, and Perfectly Fresh Potatoes\r\nStock up on the hearty goodness of premium potatoes. Naturally rich in flavor and nutrients, these kitchen staples are perfect for mashing, roasting, frying, or adding to your favorite dishes. Handpicked for quality and freshness, they’re a must-have ingredient for countless delicious recipes.', 250.00, 1, 0x75706c6f6164732f363738643030343061353231382e6a7067, 1, 5, 175),
+(12, 'Watermelon', 'Refreshing, Juicy, and Bursting with Sweetness Watermelons\r\nQuench your thirst with the hydrating sweetness of fresh watermelons. Packed with natural juices and vibrant flavor, they’re perfect for snacking, blending into drinks, or enjoying as a summertime treat. Handpicked for ripeness and quality, these watermelons bring a splash of freshness to your table.\r\n\r\n', 230.00, 1, 0x75706c6f6164732f363738643033326565646435642e6a706567, 0, 6, 0);
 
 -- --------------------------------------------------------
 
@@ -221,7 +219,7 @@ CREATE TABLE `shipping_details` (
 --
 
 INSERT INTO `shipping_details` (`id`, `account_id`, `full_name`, `address`, `city`, `postal_code`, `phone`, `created_at`) VALUES
-(1, 1, 'asdasd', 'asdasdasd', 'asdads', '123132', '234234234', '2025-01-08 14:08:41');
+(2, 2, 'Travin Ahishayan', '202/38.1/1', 'Wattala', '11300', '0769069268', '2025-01-15 08:52:49');
 
 --
 -- Indexes for dumped tables
@@ -292,7 +290,7 @@ ALTER TABLE `shipping_details`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `admin_users`
@@ -304,37 +302,37 @@ ALTER TABLE `admin_users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `shipping_details`
 --
 ALTER TABLE `shipping_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

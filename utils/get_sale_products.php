@@ -14,12 +14,14 @@ if ($products->num_rows > 0) {
 
         echo "<div class='aspect-w-1 aspect-h-1 w-full overflow-hidden'>";
         echo "<img
-                    src='images/tomato.png'
-                    alt='" .
-            $product["name"] .
+                src='" .
+            htmlspecialchars($product["image"]) .
             "'
-                    class='w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-200'
-                  />";
+                alt='" .
+            htmlspecialchars($product["name"]) .
+            "'
+                class='w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-200'
+              />";
         echo "</div>";
 
         echo "<div class='p-4'>";

@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = $_POST["price"];
     $in_stock = isset($_POST["in_stock"]) ? 1 : 0;
     $on_sale = isset($_POST["on_sale"]) ? 1 : 0;
-    $sale_price = $on_sale ? $_POST["sale_price"] : null;
+    $sale_price = $on_sale ? $_POST["sale_price"] : 0;
 
     // Handle image upload
     $image_path = $product["image"]; // Keep existing image path by default

@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare(
             "SELECT id, username, password FROM admin_users WHERE username = ?"
         );
-        $stmt->bind_param('s', $username);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->bind_result($user_id, $user_username, $user_password);
         $stmt = $stmt->fetch();
@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify user exists and password is correct
         if ($user_id && password_verify($password, $user_password)) {
             // Set session variables
-            $_SESSION["admin_id"] = $user["id"];
-            $_SESSION["admin_username"] = $user["username"];
+            $_SESSION["admin_id"] = $user_id;
+            $_SESSION["admin_username"] = $user_username;
             $_SESSION["is_admin"] = true;
 
             // If "Remember Me" is checked

@@ -145,10 +145,16 @@ $orders = $conn->query($orders_sql);
                                     $category["name"]
                                 ); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-2">Edit</button>
+                                    <button onclick="openEditCategoryModal(<?php echo $category[
+                                        "id"
+                                    ]; ?>, '<?php echo htmlspecialchars(
+    $category["name"]
+); ?>')"
+                                            class="text-blue-600 hover:text-blue-900 mr-2">Edit</button>
                                     <a href="delete_category.php?id=<?php echo $category[
                                         "id"
-                                    ]; ?>" class="text-red-600 hover:text-red-900">
+                                    ]; ?>"
+                                       class="text-red-600 hover:text-red-900">
                                         <button type="button">Delete</button>
                                     </a>
                                 </td>
@@ -315,6 +321,24 @@ $orders = $conn->query($orders_sql);
         </div>
     </div>
 
+    <!-- Edit Category Modal -->
+    <div id="editCategoryModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <h3 class="text-lg font-bold mb-4">Edit Category</h3>
+            <form action="update_category.php" method="POST">
+                <input type="hidden" id="edit_category_id" name="category_id">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" id="edit_category_name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="closeEditCategoryModal()" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Cancel</button>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         function openProductModal() {
             document.getElementById('productModal').classList.remove('hidden');
@@ -330,6 +354,15 @@ $orders = $conn->query($orders_sql);
 
         function closeCategoryModal() {
             document.getElementById('categoryModal').classList.add('hidden');
+        }
+        function openEditCategoryModal(categoryId, categoryName) {
+            document.getElementById('edit_category_id').value = categoryId;
+            document.getElementById('edit_category_name').value = categoryName;
+            document.getElementById('editCategoryModal').classList.remove('hidden');
+        }
+
+        function closeEditCategoryModal() {
+            document.getElementById('editCategoryModal').classList.add('hidden');
         }
     </script>
 </body>

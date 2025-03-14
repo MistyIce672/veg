@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Registration successful
             $_SESSION["success_message"] =
                 "Registration successful! You can now login.";
-            header("Location: ../signin.php");
+                header("Location: ../signin.php");
             exit();
         } else {
             // Registration failed
