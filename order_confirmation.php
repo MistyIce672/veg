@@ -90,7 +90,7 @@ unset($_SESSION["last_order_id"]);
                         <h3 class="text-sm font-medium text-gray-500">Order Summary</h3>
                         <div class="mt-2">
                             <p class="text-sm text-gray-900">
-                                Total Amount: $<?php echo number_format(
+                                Total Amount: LKR<?php echo number_format(
                                     $order["total_amount"],
                                     2
                                 ); ?>

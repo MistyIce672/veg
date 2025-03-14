@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
-    <!-- Include Tailwind CSS -->
+    
     <link rel="stylesheet" href="styling/style.css">
 </head>
 <body class="bg-gray-100">

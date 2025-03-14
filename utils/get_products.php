@@ -21,9 +21,11 @@ if ($category_result->num_rows > 0) {
 
             echo "<div class='aspect-w-1 aspect-h-1 w-full overflow-hidden'>";
             echo "<img
-                    src='images/tomato.png'
+                    src='" .
+                htmlspecialchars($product["image"]) .
+                "'
                     alt='" .
-                $product["name"] .
+                htmlspecialchars($product["name"]) .
                 "'
                     class='w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-200'
                   />";

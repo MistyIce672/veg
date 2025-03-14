@@ -309,7 +309,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_order"])) {
                                 <div class="border-t pt-4 mt-4">
                                     <div class="flex justify-between">
                                         <p class="text-base font-medium">Total</p>
-                                        <p class="text-base font-medium">$<?php echo number_format(
+                                        <p class="text-base font-medium">LKR<?php echo number_format(
                                             $total_price,
                                             2
                                         ); ?></p>

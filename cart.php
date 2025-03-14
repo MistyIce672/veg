@@ -51,7 +51,7 @@ include "utils/connection.php"; ?>
                         <p class="mt-1 text-sm text-gray-500">Shipping and taxes calculated at checkout</p>
                     </div>
                     <div>
-                        <p class="text-2xl font-bold text-gray-900">Total: $<?php echo number_format(
+                        <p class="text-2xl font-bold text-gray-900">Total: LKR<?php echo number_format(
                             $total_price,
                             2
                         ); ?></p>

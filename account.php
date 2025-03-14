@@ -191,7 +191,7 @@ while ($order = $orders_result->fetch_assoc()) {
                                             ]; ?> items
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            $<?php echo number_format(
+                                            LKR<?php echo number_format(
                                                 $order["total_amount"],
                                                 2
                                             ); ?>
