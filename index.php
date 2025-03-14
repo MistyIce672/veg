@@ -1,5 +1,4 @@
-<?php
-include "utils/connection.php"; ?>
+<?php include "utils/connection.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
